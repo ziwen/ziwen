@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="子文的博客-github.io : 子文的博客">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>子文的博客-github.io</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ziwen">View on GitHub</a>
+
+          <h1 id="project_title">子文的博客-github.io</h1>
+          <h2 id="project_tagline">子文的博客</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="objective-c-debug-学习" class="anchor" href="#objective-c-debug-%E5%AD%A6%E4%B9%A0" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objective-C Debug 学习</h1>
+
+<h2>
+<a id="子文的博客" class="anchor" href="#%E5%AD%90%E6%96%87%E7%9A%84%E5%8D%9A%E5%AE%A2" aria-hidden="true"><span class="octicon octicon-link"></span></a>子文的博客</h2>
+
+<p><img src="https://devimages.apple.com.edgekey.net/xcode/images/downloads_2x.png" alt="苹果xcode图标">
+只会写代码的程序员不是好程序员，程序员是一个从制造bug到解决bug的死循环中不断成长，</p>
+
+<pre><code>NSLog(@"Founction:%s\n Pretty founction:%s\n Line:%d\n File:%s\n Object:%@",__func__,__PRETTY_FUNCTION__, __LINE__, __FILE__, self );
+</code></pre>
+
+<p>输出结果</p>
+
+<pre><code>2015-03-11 15:33:20.316 ssss[4080:184167] 
+ Founction:-[AppDelegate application:didFinishLaunchingWithOptions:]
+ Pretty founction:-[AppDelegate application:didFinishLaunchingWithOptions:]
+ Line:19
+ File:/Users/ziwen/Desktop/artical/ssss/ssss/AppDelegate.m
+ Object:&lt;AppDelegate: 0x7f8beb416980&gt;
+</code></pre>
+
+<p>上述结果原因是 <strong>func</strong>, <strong>PRETTY_FUNCTION</strong>, <strong>LINE</strong>, <strong>FILE</strong>等都是系统预留的定义词，简单易用。</p>
+
+<p>同时还有一些系统方法可以从CFString 转换为NSString。包括且不限于selector，class，protocol等，参考下面的代码：</p>
+
+<pre><code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+NSLog(@"Current selector: %@", NSStringFromSelector(_cmd));
+NSLog(@"Filename: %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent]);
+NSLog(@"object class：%@",NSStringFromClass([self class]));
+return YES;
+}
+</code></pre>
+
+<p>输出结果如下：</p>
+
+<pre><code>2015-03-11 15:38:10.034 ssss[4104:186832] Current selector: application:didFinishLaunchingWithOptions:
+2015-03-11 15:38:10.034 ssss[4104:186832] Filename: AppDelegate.m
+2015-03-11 15:38:10.034 ssss[4104:186832] object class：AppDelegate
+</code></pre>
+
+<p>通过拿到字符串做一些其他操作，是不是很hi，duang，duang。</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
